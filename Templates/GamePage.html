@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>GamePage</title>
-</head>>
+    <title>BlackJack</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'Uni.css'%}">
+</head>
 <body>
-    This is a future place for construction for a blackjack Table
+    <h1>BlackJack</h1>
+    <p id="game-message">Welcome! Click "New Game" to start.</p>
+    
+    <button id="hit">Hit</button>
+    <button id="stand">Stand</button>
+    <button id="new-game">New Game</button>
 </body>
 </html>
