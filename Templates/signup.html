@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up - New Vegas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Register.css' %}">
+</head>
+
+<div class="main">
+    <div class="box">
+        <form action="/signup" method='post'>
+         {% csrf_token %}     
+          <input type="username"  name="username" placeholder="Enter a new username" required class="textbox" >
+          <input type="password" name="password" placeholder="Enter a new Password" required class="textbox">
+            <div class="link">
+              <button type="submit" class="signup">Create New Account</button>
+            </div>
+            <div class="button">
+              <a href="/" >Have an Account? Log In</a>
+            </div>
+          </form>
+    </div>
+</div>
+
+</html>
