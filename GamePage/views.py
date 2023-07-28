@@ -1,28 +1,57 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
-import random
-Deck=[]
-def GamePage(request):
-    DeckBuild(Deck)
-    random.shuffle(Deck)
-    StartGame()
-    return render(request, 'GamePage.html')
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
+from GamePage.models import Account
 
-def DeckBuild(deck):
-    values=["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    suit=["C", "D", "H", "S"]
-    for i in suit:
-        for j in values:
-            deck.append(i+j)
-def StartGame():
-    Hidden=Deck.pop()
-    DealerValue=+GetValue(Hidden)
-    print("DealerValue\n",DealerValue)
-    print("Hidden\n",Hidden)
-def GetValue(card):
-    if card[-1]=='A':
-        return(11)
-    elif card[-1]=='K' or card[-1]=='J' or card[-1]=='Q':
-        return(10)
-    else:
-        return(int(card[-1]))
+def GamePage(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+    print("account",account)
+    balance = account.Balance
+    return render(request, "GamePage.html",{'balance':balance})
+def Pyscript(request):
+    return render (request,"Pyscript.html")
+
+
+def HomePage(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(username=username,password=password)
+        print("user",user)
+        try:
+                account = Account.objects.get(user=user)
+                print("account",account)
+                balance = account.Balance
+                print("balance",balance)
+        except Account.DoesNotExist:
+                # Handle the case when the account does not exist
+                # You can set a default balance or display an error message
+            print("Yuck")
+            balance = 790  # Set a default balance
+            messages.warning(request, "Account does not exist. Please contact support.")
+        if user is not None:
+            login(request, user)
+            return render(request,"GamePage.html",{'user':username,'balance':balance})
+        else:
+            messages.error(request, "Bad Creditionals !!")
+            return redirect('HomePage')
+    return render(request, "HomePage.html") 
+def Logout(request):
+    logout(request)
+    return render(request, "HomePage.html")
+
+def signup(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        Balance=1000
+        user = User.objects.create_user(username=username, password=password)
+        account = Account.objects.create(user=user)
+        user.save()
+        messages.success(request, "Welcome! You now have an account")
+        return redirect('HomePage')
+    return render(request, "signup.html")

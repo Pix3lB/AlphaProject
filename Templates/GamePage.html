@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BlackJack</title>
+    <title>BlackJack - New Vegas</title>
     {% load static %}
-    <link rel="stylesheet" href="{%static 'Uni.css'%}">
+    <link rel="stylesheet" href="{% static 'Gamepage.css' %}">
+    <link rel="shortcut icon" href="{%  static 'favicon.png' %}">
 </head>
+<div class="page">  
+<div class="navbar">
+    <p class="user"> {{ user }}</p>
+    <p class="Balance">Balance: {{ balance }}</p> 
+    <p > 
+        <a class="LogOut" href="{% url "Logout" %}">
+        Log Out
+        </a>
+    </p>
+</div>
 <body>
-    <h1>BlackJack</h1>
-    <p id="game-message">Welcome! Click "New Game" to start.</p>
-    
-    <button id="hit">Hit</button>
-    <button id="stand">Stand</button>
-    <button id="new-game">New Game</button>
+<div class="main">
+    <h1>Dealers Hand<h1>
+    <div id="DealerHand"></div>
+    <h1>Players Hand<h1>
+    <div id="PlayerHand"></div>
+    <button id="StartGame">Start Game</button>
+    <button id="Hit">Hit</button>
+    <button id="Stand">Stand</button>
+    <a href="{% url 'GamePage' %}" id="reload"></a>  
+    <p id="Result"></p> 
+</div>
+</div>
+
 </body>
+<script src="{% static 'Gamepage.js' %}"></script>  
 </html>
