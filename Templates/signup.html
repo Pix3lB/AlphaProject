@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign Up - New Vegas</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Register.css' %}">
+    <link rel="stylesheet" href="{% static '/css/Register.css' %}">
 </head>
 
 <div class="main">
@@ -14,6 +14,13 @@
         <form action="/signup" method='post'>
          {% csrf_token %}     
           <input type="username"  name="username" placeholder="Enter a new username" required class="textbox" >
+          <br>
+          <input type="email" name="email" placeholder="Enter your email" required class="textbox">
+          <input type="tel" name="pnumber" placeholder="Enter your number" required class="textbox">
+          <br >
+          <input type="name" name="fname" placeholder="Enter your First Name" required class="textbox">
+          <input type="name" name="lname" placeholder="Enter your Last Name" required class="textbox">
+          <br>
           <input type="password" name="password" placeholder="Enter a new Password" required class="textbox">
             <div class="link">
               <button type="submit" class="signup">Create New Account</button>

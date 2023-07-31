@@ -76,22 +76,33 @@ function Hit(){
     DrawCard(1,PlayerHand,"PlayerHand",1)
 }
 function Stand(){
-    const cardElement = document.getElementById('card1');
-    cardElement.style.color = '';
     document.getElementById("Hit").disabled = true;
-    document.getElementById("Stand").disabled = true;
-    let message="";
-    if (PlayerSum>21)   {message ="You Lose";}
-    else if (PlayerSum==21)  { message ="BlackJack!! You win"}
-    while (DealerSum<PlayerSum && DealerSum<=17){
-        DrawCard(1,DealerHand,"DealerHand")}
-    if(DealerSum>PlayerSum && DealerSum<=21){ message ="Dealer Won"}
-    else if (DealerSum==PlayerSum){ message ="Push its a tie"}
-    else { message ="You win Dealer Bust"}
-   
-    document.getElementById("Result").innerText = message;
-    document.getElementById("reload").innerHTML = "Restart";
+document.getElementById("Stand").disabled = true;
+document.getElementById("reload").innerHTML = "Restart";
+const cardElement = document.getElementById('card1');
+cardElement.style.color = ''; 
+let message = "";
+if (PlayerSum > 21) {
+    return(document.getElementById("Result").innerText = "You Lose");
+} 
+else if (PlayerSum == 21) {
+    return(document.getElementById("Result").innerText = "BlackJack!! You win");
 }
+
+while (DealerSum < PlayerSum || DealerSum <= 17) {
+    setTimeout(
+    DrawCard(1, DealerHand, "DealerHand"),5000);
+}
+
+if (DealerSum > PlayerSum && DealerSum <= 21) {
+    return(document.getElementById("Result").innerText = "You Lose");
+} else if (DealerSum == PlayerSum) {
+    return(document.getElementById("Result").innerText = "Push its a tie");
+} else {
+    return(document.getElementById("Result").innerText = "You win Dealer Bust");;
+}       
+}
+
 function getValue(card) {
     // console.log("getValue card",card);
     value=card.slice(0,-2);
@@ -110,9 +121,7 @@ function checkAce(card) {
     }
     return 0;
 }
-
-let cardCounter = 0; // Initialize the card counter variable
-
+let cardCounter = 0; 
 function createCardElement(card) {
     const rank = card.slice(0, -2);
     const suit = card.slice(-1);
@@ -128,7 +137,6 @@ function createCardElement(card) {
 
     return cardElement;
 }
-
 function rendercard(card,address) {
     const HandContainer = document.getElementById(address);
         const cardElement = createCardElement(card);

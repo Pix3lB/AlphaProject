@@ -3,18 +3,16 @@
 <head>
     <title>BlackJack - New Vegas</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Gamepage.css' %}">
+    <link rel="stylesheet" href="{% static "/css/Gamepage.css" %}">
     <link rel="shortcut icon" href="{%  static 'favicon.png' %}">
 </head>
 <div class="page">  
 <div class="navbar">
     <p class="user"> {{ user }}</p>
     <p class="Balance">Balance: {{ balance }}</p> 
-    <p > 
-        <a class="LogOut" href="{% url "Logout" %}">
-        Log Out
-        </a>
-    </p>
+    <a class="Link" href="{% url "players" %}"> Players</a>    
+    <a class="Link" href="{% url "profile" %}"> Profile</a>
+        <a class="Link" href="{% url "Logout" %}">Log Out</a>
 </div>
 <body>
 <div class="main">

@@ -1,0 +1,55 @@
+@import url(User.css);
+@import url(GamePage.css);
+
+body {
+    background: url(../svg/ProfileBG.svg);
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.box {
+    width: 500px;
+    background-color: var(--black);
+    border-radius: 10px;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px
+}
+
+.content {
+    text-align: right;
+    font-size: 28px;
+    color: #777
+}
+
+.content p {
+    font-size: 20px;
+    color: #777
+}
+
+.label {
+    text-align: left;
+    color: #fff
+}
+
+.label p {
+    font-size: 20px;
+    color: #fff
+}
+
+#Edit {
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .5);
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #181818;
+    transition: .2s ease;
+    margin-left: 0
+}
+
+#Edit:hover {
+    background-color: var(--red);
+    transition: .2s ease
+}

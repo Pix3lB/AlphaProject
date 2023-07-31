@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+    <link rel="shortcut icon" href= "{%  static "favicon.png" %}" >
+</head>
+
+<div class="page">  
+    <div class="navbar">
+            <a class="Link" href="{% url "GamePage" %}">Game Page</a>
+            <a class="Link" href="{% url "Logout" %}">Log Out</a>
+    </div>
+<body>
+<div class="main">
+    
+    <div class="box" class="b1">
+        <div class="label">
+            <p>Username:</p>
+            <p>Name:</p>
+        </div>
+        <div class="content">
+            <p>{{ user.username }}</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+        </div>
+    </div>
+    <div class="box" class="b2">
+        <div class="label">
+            <p><strong>Email:</strong></p>
+            <p><strong>Number:</strong></p>
+        </div>
+        <div class="content">
+            <p>{{ user.email }}</p>
+            <p>{{ phonenumber }}</p>
+        </div>
+    </div>
+    <div class="box" class="b2">
+        <div class="label">
+            <p><strong>Balance:</strong></p>
+        </div>
+        <div class="content">
+            <p>{{ balance }}</p>
+        </div>
+    </div>        
+    </div>
+<a id="Edit" href="{% url 'editprofile' %}"> Edit </a>
+</body>
+
+<script src="{% static 'profile.js' %}"></script>  
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/editprofile.css' %}">
+    <link rel="shortcut icon" href= "{%  static "favicon.png" %}" >
+</head>
+
+<div class="page">  
+    <div class="navbar">
+            <a class="Link" href="{% url "GamePage" %}">Game Page</a>
+            <a class="Link" href="{% url "Logout" %}">Log Out</a>
+    </div>
+    <body>
+        <div class="main">
+            <form action="{% url 'editprofile' %}" method="post">
+                {% csrf_token %}
+                <div class="box" class="b1">
+                    <div class="label">
+                        <p for="username">Username:</p>
+                        
+                        <p for="name">First Name:</p>
+                        <p for="name">Last Name:</p>
+                    </div>
+                    <div class="content">
+                        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+                        <input type="text" id="fname" name="fname" value="{{ user.first_name }}" required>
+                        <input type="text" id="lname" name="lname" value="{{ user.last_name }}" required>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="label">
+                        <p for="email"><strong>Email:</strong></p>
+                        <p for="pnumber"><strong>Number:</strong></p>
+                    </div>
+                    <div class="content">
+                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                        <input type="tel" id="pnumber" name="pnumber" value="{{ phonenumber }}" required>
+                    </div>
+                </div>
+                <a id="cancel" href="{% url 'profile' %}">Cancel</a><br>
+                <button type="submit" id="Submit">Submit</button>
+            </form>
+        </div>
+    </body>
+    
+
+<script src="{% static 'profile.js' %}"></script>  
+</html>

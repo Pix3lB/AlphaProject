@@ -5,16 +5,52 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from GamePage.models import Account
 
-def GamePage(request):
+def GamePage(request):   
     user = request.user
     account = Account.objects.get(user=user)
     print("account",account)
     balance = account.Balance
     return render(request, "GamePage.html",{'balance':balance})
-def Pyscript(request):
-    return render (request,"Pyscript.html")
-
-
+def profile(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+    acc_context = {
+        'balance': account.Balance,
+        'phonenumber': account.Phone_Number,
+    }
+    print(account.Phone_Number)
+    print(account.Balance)
+    return render(request,"profile.html",acc_context)
+def editprofile(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+        firstname = request.POST["fname"]
+        lastname = request.POST["lname"]
+        pnumber = request.POST["pnumber"]
+        user = User.objects.filter(username=username).first()
+        if user:
+            user.email = email
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+            # Assuming Account is your custom user profile model
+            account = Account.objects.filter(user=user).first()
+            if account:
+                account.Phone_Number = pnumber
+                account.save()
+            messages.success(request, "Profile updated")
+            return redirect('profile')
+        else:
+            messages.error(request, "User does not exist")
+            return redirect('profile')
+    user=request.user
+    account = Account.objects.get(user=user)
+    acc_context = {
+        'balance': account.Balance,
+        'phonenumber': account.Phone_Number,
+    }
+    return render(request,"editprofile.html",acc_context)
 def HomePage(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -43,15 +79,21 @@ def HomePage(request):
 def Logout(request):
     logout(request)
     return render(request, "HomePage.html")
-
 def signup(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-        Balance=1000
-        user = User.objects.create_user(username=username, password=password)
-        account = Account.objects.create(user=user)
+        email= request.POST["email"]
+        firstname = request.POST["fname"]
+        lastname = request.POST["lname"]
+        pnumber = request.POST["pnumber"]
+        user = User.objects.create_user(username=username, password=password,email=email, **{'last_name': lastname, 'first_name': firstname})
+        account = Account.objects.create(user=user,Phone_Number=pnumber)
         user.save()
         messages.success(request, "Welcome! You now have an account")
         return redirect('HomePage')
     return render(request, "signup.html")
+def players(request):
+    users = User.objects.all()
+    context = {'users': users}
+    return render(request, "players.html",context)

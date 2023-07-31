@@ -8,11 +8,12 @@ body {
     margin: 0;
     display: flex;
     min-height: 100vh;
-    background: url("GamePage.svg");
+    background: url("../svg/GamePage.svg");
     background-repeat: no-repeat;   
     background-size: cover;
     font-family: 'Franklin Gothic Medium', sans-serif;
     flex-direction: column;
+    color: white;
   }
 .page{
     display: flex;
@@ -27,18 +28,26 @@ body {
     border-radius: 6px;
     color: white;
     box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: space-between;
 }
 .navbar p{
     display: flex;
     float: left;
-    padding-left: 10px;    
-    margin-left: 25px;
+    margin: 10px;
 }
-.navbar p a{
+.navbar a {
     display: flex;
     float: left;
-    padding-left: 10px;    
-    margin-left: 25px;
+    margin: 10px;
+    padding-inline: 10px;
+    border-bottom : white solid;
+    border-radius: 1px;
+}
+.navbar a:hover{
+    color: #D2292D;
+    transition: 0.2s ease;
+    border-bottom : #D2292D solid;
 }
 .main{
     display: flex ;
@@ -102,9 +111,6 @@ a{
     color: white;
     margin-left: 10px;
     text-decoration: none;
-    
-}
-a:hover{
-    color: #D2292D;
-    transition: 0.2s ease;
+    justify-content: center;
+    align-items: center;    
 }

@@ -5,10 +5,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("RegisterBG.svg");
+    background: url("../svg/RegisterBG.svg");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Franklin Gothic Medium', sans-serif;
+    color: white;
 }
 .link .signup {
     border: none;
