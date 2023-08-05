@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from GamePage.models import Account
+from django.db import IntegrityError
 
 def GamePage(request):   
     user = request.user
@@ -34,7 +35,6 @@ def editprofile(request):
             user.first_name = firstname
             user.last_name = lastname
             user.save()
-            # Assuming Account is your custom user profile model
             account = Account.objects.filter(user=user).first()
             if account:
                 account.Phone_Number = pnumber
@@ -81,19 +81,36 @@ def Logout(request):
     return render(request, "HomePage.html")
 def signup(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        email= request.POST["email"]
-        firstname = request.POST["fname"]
-        lastname = request.POST["lname"]
-        pnumber = request.POST["pnumber"]
-        user = User.objects.create_user(username=username, password=password,email=email, **{'last_name': lastname, 'first_name': firstname})
-        account = Account.objects.create(user=user,Phone_Number=pnumber)
-        user.save()
-        messages.success(request, "Welcome! You now have an account")
-        return redirect('HomePage')
+        try:    
+            username = request.POST["username"]
+            password = request.POST["password"]
+            email= request.POST["email"]
+            firstname = request.POST["fname"]
+            lastname = request.POST["lname"]
+            pnumber = request.POST["pnumber"]
+            user = User.objects.create_user(username=username, password=password,email=email, **{'last_name': lastname, 'first_name': firstname})
+            account = Account.objects.create(user=user,Phone_Number=pnumber)
+            user.save()
+            messages.success(request, user.username+" created an account")
+            return redirect('signupsuccess')
+        except IntegrityError:
+                return redirect('signupfailure')
     return render(request, "signup.html")
+def signupsuccess(request):
+    return render(request,"signupsuccess.html")
+
+def signupfailure(request): 
+    user = request.user
+    print(user.username)
+    return render(request,"signupfailure.html")  
 def players(request):
     users = User.objects.all()
     context = {'users': users}
     return render(request, "players.html",context)
+def win(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+    account.Balance = account.Balance+500
+    print(account.Balance)
+    account.save()
+    return redirect('GamePage')

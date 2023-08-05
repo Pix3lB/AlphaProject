@@ -1,115 +1,43 @@
 @import url(User.css);
-
-:root {
-  --red: #D2292D;
-  --blue: #1761B0;
-  --green: #13703a;
-  --black: #181818
-}
-
 body {
   margin: 0;
   display: flex;
+  
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  background: url(../svg/GamePage.svg);
+  background: url("../svg/HomepageBG.svg");
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Franklin Gothic Medium', sans-serif;
-  flex-direction: column;
-  color: #fff
 }
-
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center
-}
-
-.navbar {
-  margin-top: 15px;
-  flex-direction: row;
-  background-color: var(--black);
-  width: 95%;
-  border-radius: 6px;
-  color: #fff;
-  box-shadow: 0 0 3px 2px rgba(0, 0, 0, .5);
-  display: flex;
-  justify-content: space-between
-}
-
-.navbar p {
-  display: flex;
-  float: left;
-  margin: 10px
-}
-
-.navbar a {
-  display: flex;
-  float: left;
-  margin: 10px;
-  padding-inline: 10px;
-  border-bottom: #fff solid;
-  border-radius: 1px
-}
-
-.navbar a:hover {
-  color: #d2292d;
-  transition: .2s ease;
-  border-bottom: #d2292d solid
-}
-
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 25px;
-  color: #fff;
-  flex-direction: column
-}
-
-button {
-  padding: 15px 20px;
-  background-color: #181818;
-  border-radius: 6px;
-  box-shadow: 0 0 3px 2px rgba(0, 0, 0, .5);
-  color: #fff;
+.link .login {
   border: none;
+  outline: none;
+  cursor: pointer;
+  background: #D2292D;
+  padding: 14px 0;
+  border-radius: 6px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+  width: 420px;
+}
+.link .login:hover {
+  background: var(--black);
+}
+.button a {
+  padding: 15px 20px;
+  background: var(--green);
+  border-radius: 6px;
+  color: white;
   font-size: 1.063rem;
   font-weight: 600;
-  transition: .2s ease;
-  margin-top: 10px
+  transition: 0.2s ease;
+  width: 420px;
 }
-
-button:hover {
-  background-color: #13703a
-}
-
-@keyframes shake {
-  0% {
-    transform: translateX(0)
-  }
-
-  25% {
-    transform: translateX(-5px)
-  }
-
-  50% {
-    transform: translateX(5px)
-  }
-
-  75% {
-    transform: translateX(-5px)
-  }
-
-  100% {
-    transform: translateX(0)
-  }
-}
-
-a {
-  color: #fff;
-  margin-left: 10px;
-  text-decoration: none;
-  justify-content: center;
-  align-items: center
+#logo{
+  width: 150px;
+  height: 150px;
 }

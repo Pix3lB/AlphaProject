@@ -4,14 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>New Vegas</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/HomePage.css' %}">
+    <link rel="shortcut icon" href="{%  static 'favicon.png' %}">
 </head>
 
 <div class="main">
     <div class="box">
-        <form action="" method='post'>
+      <img src="{% static 'favicon.png' %}" alt="Favicon" id="logo">
+      <form action="" method='post'>
           {% csrf_token %} 
           <input type="username"  name="username" placeholder="Enter your username" required class="textbox" >
             <input type="password"  name="password" placeholder="Enter your Password" required class="textbox">

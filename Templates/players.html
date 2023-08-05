@@ -6,12 +6,20 @@
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/players.css' %}">
 </head>
+<div class="navbar">
+    <p class="user"> {{ user }}</p>
+    <p class="Balance">Balance: {{ balance }}</p> 
+    <a class="Link" href="{% url "players" %}"> Players</a>    
+    <a class="Link" href="{% url "profile" %}"> Profile</a>
+        <a class="Link" href="{% url "Logout" %}">Log Out</a>
+</div>
 <body>
+      
     <h1>Users</h1>
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>username</th>
                 <th>Name</th>
                 <th>Last Seen</th>
             </tr>

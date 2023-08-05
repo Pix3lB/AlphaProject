@@ -6,6 +6,7 @@ var DealerAce=0
 const PlayerHand=[]
 const DealerHand=[]
 deck = [];
+var DealerReveal= new Audio('/static/sounds/DealerReveal.mp3');
 window.onload = function() {
     buildDeck();
     shuffleDeck();
@@ -76,31 +77,34 @@ function Hit(){
     DrawCard(1,PlayerHand,"PlayerHand",1)
 }
 function Stand(){
+    DealerReveal.play();
     document.getElementById("Hit").disabled = true;
-document.getElementById("Stand").disabled = true;
-document.getElementById("reload").innerHTML = "Restart";
-const cardElement = document.getElementById('card1');
-cardElement.style.color = ''; 
-let message = "";
-if (PlayerSum > 21) {
-    return(document.getElementById("Result").innerText = "You Lose");
-} 
-else if (PlayerSum == 21) {
-    return(document.getElementById("Result").innerText = "BlackJack!! You win");
-}
+    document.getElementById("Stand").disabled = true;
+    document.getElementById("reload").innerHTML = "Restart";
+    const cardElement = document.getElementById('card1');
+    cardElement.style.color = '';
+    if (PlayerSum > 21) {  
+        return (document.getElementById("Result").innerText = "You Lose");
+    }
+    else if (PlayerSum == 21) {
+        document.getElementById("win").innerHTML = "Collect Winnings"; 
+        return (document.getElementById("Result").innerText = "BlackJack!! You win");
+    }
 
-while (DealerSum < PlayerSum || DealerSum <= 17) {
-    setTimeout(
-    DrawCard(1, DealerHand, "DealerHand"),5000);
-}
+    while (DealerSum < PlayerSum || DealerSum < 17) {
+        console.log(DealerSum);
+        DrawCard(1, DealerHand, "DealerHand");
+        console.log(DealerSum);
+    }
 
-if (DealerSum > PlayerSum && DealerSum <= 21) {
-    return(document.getElementById("Result").innerText = "You Lose");
-} else if (DealerSum == PlayerSum) {
-    return(document.getElementById("Result").innerText = "Push its a tie");
-} else {
-    return(document.getElementById("Result").innerText = "You win Dealer Bust");;
-}       
+    if (DealerSum > PlayerSum && DealerSum <= 21) {
+        return (document.getElementById("Result").innerText = "You Lose");
+    } else if (DealerSum == PlayerSum) {
+        return (document.getElementById("Result").innerText = "Push its a tie");
+    } else {
+        document.getElementById("win").innerHTML = "Collect Winnings"; 
+        return (document.getElementById("Result").innerText = "You win Dealer Bust");;
+    }
 }
 
 function getValue(card) {

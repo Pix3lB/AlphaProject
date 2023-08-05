@@ -1,6 +1,6 @@
-
+@import url(GamePage.css);
 table {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
   }
   
@@ -12,7 +12,17 @@ table {
     border-radius: 5px;
     
   }
-  
+  .navbar {
+    margin-top: 15px;
+    flex-direction: row;
+    background-color: var(--black);
+    width: 95%;
+    border-radius: 6px;
+    color: #fff;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: space-between
+  }
   tr {
     display: block;
     margin-bottom: 10px;
@@ -26,10 +36,12 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-family: 'Franklin Gothic Medium', sans-serif;
   background: url("../svg/GamePage.svg");
   background-repeat: no-repeat;   
   background-size: cover;
   color: white;
+}
+th:hover,tr:hover,td:hover{
+  color: #D2292D;
 }
